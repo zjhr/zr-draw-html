@@ -21,7 +21,7 @@ import 'zr-draw-html/lib/zr-draw-html.css'
 Vue.use(zrDrawHtml)
 ```
 
-![Image text](https://github.com/zjhr/zr-draw-html/tree/master/images/show.png)
+![Image text](https://github.com/zjhr/zjhr-zr-draw-html-/blob/master/images/show.png)
 
 ## 使用指南
 
