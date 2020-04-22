@@ -104,6 +104,7 @@ import methods from "./mixins/methods";
 import "./zrDrawHtml.scss";
 import "./common.css";
 import "./explorer.css";
+import utils from './utils'
 
 export default {
 	name: "zr-draw-html",
@@ -184,7 +185,7 @@ export default {
 						// 缓存过滤当前的不存在的数据，为删
 						const tDel = tGather.filter((v) => tNow.every((e) => e && lineJudgeFun(e, v)));
 						if (tDel && tDel.length) {
-							this.$utils.forEach(tDel, (d) => {
+							utils.forEach(tDel, (d) => {
 								const tTableId = d.tableId;
 								const tId = d.fieldId;
 								isPass = this.ergraph.delLinkLine(gk, tTableId, 0, tId);
@@ -195,7 +196,7 @@ export default {
 						// 当前过滤缓存的不存在的数据，为增
 						const tAdd = tNow.filter((v) => tGather.every((e) => e && lineJudgeFun(e, v)));
 						if (tAdd && tAdd.length) {
-							this.$utils.forEach(tAdd, (d) => {
+							utils.forEach(tAdd, (d) => {
 								const tTableId = d.tableId;
 								const tId = d.fieldId;
 								const lineName = d.lineName;
@@ -206,7 +207,7 @@ export default {
 							// this.ergraph.tableRefresh(gk);
 						}
 						if (isPass) {
-							gv.to = this.$utils.deepClone(tNow);
+							gv.to = utils.deepClone(tNow);
 						}
 						// 列操作
 						// 添加表后，处理链接关系
@@ -215,9 +216,9 @@ export default {
 						// const eq = cNow.filter((t) => Object.values(cGather).some(v=>v.fieldId===t.fieldId));// 过滤旧数据和当前的数据共同数据，定为相等
 						const add = cNow.filter((t) => Object.values(cGather).every((v) => v.fieldId !== t.fieldId));// 过滤当前的数据不存在旧数据，定为增加
 						if (add && add.length) {// 缓存增加字段
-							this.$utils.forEach(add, (t) => {
+							utils.forEach(add, (t) => {
 								const { fieldId: sId } = t;
-								cGather[sId] = Object.assign(cGather[sId] || { to: [] }, this.$utils.deepClone(t, ["to"]));
+								cGather[sId] = Object.assign(cGather[sId] || { to: [] }, utils.deepClone(t, ["to"]));
 							});
 							// debugger;
 							// this.ergraph.tableRefresh(gk);
@@ -225,8 +226,8 @@ export default {
 						// 过滤旧数据不存在当前的数据，定为删除
 						const del = Object.values(cGather).filter((t) => cNow.every((e) => e.fieldId !== t.fieldId));
 						if (del && del.length) {// 缓存删除的字段
-							this.$utils.forEach(del, (t) => {
-								this.$utils.forEach(t.to, (d) => {
+							utils.forEach(del, (t) => {
+								utils.forEach(t.to, (d) => {
 									const tTableId = d.tableId;
 									const tId = d.fieldId;
 									this.ergraph.delLinkLine(gk, tTableId, t.fieldId, tId);
@@ -234,7 +235,7 @@ export default {
 								// 处理当前删除的字段的传入关系，执行删除处理
 								let i = 0;
 								while (i < val.length) {
-									this.$utils.forEach(val[i].children, (v) => {
+									utils.forEach(val[i].children, (v) => {
 										if (v.to && v.to.length) {
 											v.to = v.to.filter((item) => item.fieldId !== t.fieldId);
 										}
@@ -254,14 +255,14 @@ export default {
 							const parent = this.ergraph.graph.getDefaultParent();
 							const cell = gv.ergraph;
 							const edges = this.ergraph.graph.getEdges(cell, parent, true, true);// 获取传入和传出的关系
-							this.$utils.forEach(edges, (v) => {
+							utils.forEach(edges, (v) => {
 								const { source, value } = v;
 								const sTableRowIndex = ~~value.getAttribute("sourceRow");
 								if (!relationArr.includes(source.id)) {
 									relationArr.push(source.id);
 								}
 								if (sTableRowIndex) {// 不是表才进行重新连接
-									this.$utils.forEach(this.tableGather[source.id].children, (c) => {
+									utils.forEach(this.tableGather[source.id].children, (c) => {
 										// 判断不等于当前table，说明是传入的线，处理删除线缓存
 										if (source.id !== gk) {
 											c.to = c.to.filter((f) => f.tableId !== gk);
@@ -284,7 +285,7 @@ export default {
 						}
 						// debugger;
 						this.ergraph.tableRefresh(gk);
-						this.$utils.forEach(relationArr, (sourceId) => {
+						utils.forEach(relationArr, (sourceId) => {
 							if (tableChildrenObj[sourceId] && tableChildrenObj[sourceId].to) {
 								for (let [tk, tv] of Object.entries(tableChildrenObj[sourceId].to)) {
 									let isPass = true;// 判断添加/删除关系是否成功
@@ -292,7 +293,7 @@ export default {
 									// 缓存过滤当前的不存在的数据，为删
 									const del = cGatherTo.filter((v) => tv.every((e) => e && lineJudgeFun(e, v)));
 									if (del && del.length) {// 删
-										this.$utils.forEach(del, (d) => {
+										utils.forEach(del, (d) => {
 											const tTableId = d.tableId;
 											const tId = d.fieldId;
 											isPass = this.ergraph.delLinkLine(sourceId, tTableId, tk, tId);
@@ -303,7 +304,7 @@ export default {
 									// 当前过滤缓存的不存在的数据，为增
 									const add = tv.filter((v) => cGatherTo.every((e) => e && lineJudgeFun(e, v)));
 									if (add && add.length) {
-										this.$utils.forEach(add, (d) => {
+										utils.forEach(add, (d) => {
 											const tTableId = d.tableId;
 											const tId = d.fieldId;
 											const lineName = d.lineName;
@@ -314,7 +315,7 @@ export default {
 										this.ergraph.tableRefresh(sourceId);
 									}
 									if (isPass) {
-										this.tableGather[sourceId].children[tk].to = this.$utils.deepClone(tv);
+										this.tableGather[sourceId].children[tk].to = utils.deepClone(tv);
 									}
 								}
 							}
@@ -328,21 +329,21 @@ export default {
 						console.log(delIdArr);
 						// debugger;
 						const parent = this.ergraph.graph.getDefaultParent();
-						this.$utils.forEach(delIdArr, (key) => {// 删除缓存数据与删除传入该table的关系线
+						utils.forEach(delIdArr, (key) => {// 删除缓存数据与删除传入该table的关系线
 							// 删除传入该table的关系线
 							const cell = this.ergraph.findTable(key);
 							const edges = this.ergraph.graph.getEdges(cell, parent, true, false);// 获取传入的关系
 							console.log(edges);
-							this.$utils.forEach(edges, (v) => {
+							utils.forEach(edges, (v) => {
 								const { sTable, sTableRow: nsTableRow, sTableRowIndex } = this.getTableArrRelationFun(v);
 								const { sTableRow: gsTableRow } = this.getTableGatherRelationFun(v);
 								// 当存在删除的表的关系的表是表连过去的话，处理
 								if (sTableRowIndex === -1) {
 									sTable.to = sTable.to.filter((t) => t.tableId !== key);
-									this.tableGather[sTable.tableId].to = this.$utils.deepClone(sTable.to);
+									this.tableGather[sTable.tableId].to = utils.deepClone(sTable.to);
 								} else {
 									nsTableRow.to = nsTableRow.to.filter((t) => t.tableId !== key);
-									gsTableRow.to = this.$utils.deepClone(nsTableRow.to);
+									gsTableRow.to = utils.deepClone(nsTableRow.to);
 								}
 							});
 							// debugger;

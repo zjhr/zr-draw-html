@@ -17,38 +17,7 @@ import {
 import {
   Message
 } from "element-ui";
-const trim = str =>
-  str && !(str instanceof Object) ?
-  String(str).replace(/(^\s+)|(\s+$)/g, '') :
-  str
-const isEmpty = value =>
-  !value ||
-  value === undefined ||
-  trim(value) === '' ||
-  trim(value) === 'null' ||
-  value === '' ||
-  value.length === 0
-const forEach = (arr, func) => {
-  if (isEmpty(arr) || !func) {
-    return
-  }
-  if (Array.isArray(arr)) {
-    for (let i = 0; i < arr.length; i++) {
-      let ret = func(arr[i], i) // 回调函数
-      if (typeof ret !== 'undefined' && (ret === null || ret === false)) {
-        break
-      }
-    }
-  } else {
-    // eslint-disable-next-line guard-for-in
-    for (let item in arr) {
-      let ret = func(arr[item], item) // 回调函数
-      if (typeof ret !== 'undefined' && (ret === null || ret === false)) {
-        break
-      }
-    }
-  }
-}
+import utils from '../utils'
 export class ERGraph {
   constructor(el, config) {
     this.config = config;
@@ -795,7 +764,7 @@ export class ERGraph {
     const data = cell.value.data;
     const allf = document.createDocumentFragment();
     const f = document.createDocumentFragment();
-    forEach(data.children, (item) => {
+    utils.forEach(data.children, (item) => {
       const tr = document.createElement("tr");
       const td1 = document.createElement("td");
       const td2 = document.createElement("td");
@@ -840,7 +809,7 @@ export class ERGraph {
     let h = defaultHeight || 0;
     if (!h) {
       if (children.length) {
-        forEach(children, (v, i) => {
+        utils.forEach(children, (v, i) => {
           h += 31;
           if (i === 0) {
             h += 26;
@@ -899,7 +868,7 @@ export class ERGraph {
    */
   removeTables(tableIdArr) {
     const cells = [];
-    forEach(tableIdArr, (v) => {
+    utils.forEach(tableIdArr, (v) => {
       cells.push(this.findTable(v));
     });
     this.graph.getModel().beginUpdate();
@@ -1012,7 +981,7 @@ export class ERGraph {
     const tIndex = this.findTableColumn(tTable, tId);
     const edges = this.graph.getEdges(sTable, parent, false, true); // 获取传出关系点
     const newEdges = [];
-    forEach(edges, (v) => {
+    utils.forEach(edges, (v) => {
       const {
         source,
         target,

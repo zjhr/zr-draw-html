@@ -1,6 +1,6 @@
 {
   "name": "zr-draw-html",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "er图组件，基于vue, element-ui, mxgroup.js 开发，完全数据驱动模式使用。",
   "private": false,
   "main": "lib/zr-draw-html.min.js",

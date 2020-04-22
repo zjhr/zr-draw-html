@@ -1,3 +1,6 @@
+import {
+  Message
+} from "element-ui";
 export default {
   data() {
     return {
@@ -214,7 +217,7 @@ export default {
               // 更新显示
               this.ergraph.graph.getModel().endUpdate();
             }
-            this.$message({
+            Message({
               showClose: true,
               message: "当前连线已经存在关系。",
               type: "warning"
