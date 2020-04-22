@@ -1,0 +1,151 @@
+.zr-draw-html {
+  .zr-canvas {
+    * {
+      box-sizing: initial;
+      margin: initial;
+    }
+
+    .table-content {
+      overflow: auto;
+      cursor: default;
+      background: #fff;
+    }
+
+    table {
+      border-collapse: collapse;
+      height: 100%;
+      width: 100%;
+      $bc: #f6f6f6;
+
+      &.title {
+        border-color: $bc;
+        cursor: move;
+        height: 26px;
+        border-bottom: 0;
+        color: #fff;
+        text-align: center;
+        // border: 1px solid;
+        // border-radius: 5px 5px 0 0;
+
+        th {
+          white-space: nowrap;
+          font-weight: bold;
+        }
+      }
+
+      &.erd {
+        border-color: $bc;
+        overflow: auto;
+        cursor: move;
+        white-space: nowrap;
+
+        td {
+          border-color: #c3c3c3;
+          text-align: left;
+          color: #000;
+
+          img {
+            margin-right: 3px;
+          }
+
+          .zr-draw-html__label {
+            &.label__disabled {
+              opacity: 0.3;
+            }
+
+            img {
+              width: 16px;
+              height: 16px;
+              display: none;
+
+              &.label__unck {
+                display: inline-block;
+              }
+            }
+
+            input {
+              display: none;
+            }
+
+            input:checked+img.label__ck {
+              display: inline-block;
+            }
+
+            input:checked~img.label__unck {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .zr-draw-html__tool {
+    height: auto !important;
+    padding: 5px 10px;
+
+    .zr-draw-html__toolbtn {
+      display: inline-block;
+      margin: 0 5px 0 0;
+      cursor: pointer;
+      color: #409DFE;
+      position: relative;
+
+      &:hover {
+        background-color: rgba(112, 130, 187, 0.3);
+        color: #fff;
+      }
+
+      >div {
+        padding: 5px;
+      }
+
+      input:checked+div {
+        background-color: #b6b6b6;
+        ;
+        color: #fff;
+      }
+    }
+  }
+
+  .zr-draw-html__toolend {
+    margin-right: 15px !important;
+
+    &::after {
+      content: "";
+      display: block;
+      height: 20px;
+      width: 1px;
+      position: absolute;
+      right: -4px;
+      top: 3px;
+      background: #cfcfcf;
+    }
+
+    &.el-checkbox {
+      margin-right: 20px !important;
+
+      &::after {
+        top: -1px;
+        right: -8px;
+      }
+    }
+  }
+
+  .zr-draw-html__account {
+    right: 10px;
+    top: 10px;
+    width: 160px;
+    box-shadow: 2px 0px 5px #c3c3c3;
+
+    textarea {
+      background: rgb(255, 248, 53);
+    }
+  }
+
+  .zr-draw-html__legend {
+    bottom: 18px;
+    left: 15px;
+    box-shadow: 1px 1px 5px #ccc;
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "zr-draw-html",
+  "version": "0.1.0",
+  "description": "er图组件，基于vue, element-ui, mxgroup.js 开发，完全数据驱动模式使用。",
+  "private": false,
+  "main": "lib/zr-draw-html.min.js",
+  "author": "zjhr",
+  "license": "ISC",
+  "keyword": [
+    "vue",
+    "elemet-ui",
+    "element",
+    "vuecli3",
+    "mxgroup.js",
+    "er图",
+    "画图"
+  ],
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lib": "vue-cli-service build --target lib --name zr-draw-html --dest lib packages/index.js"
+  },
+  "dependencies": {
+    "core-js": "^3.6.4",
+    "element-ui": "^2.13.1",
+    "mxgraph-js": "^1.0.1",
+    "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.3.0",
+    "@vue/cli-service": "~4.3.0",
+    "sass": "^1.26.3",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
