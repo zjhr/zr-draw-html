@@ -148,6 +148,7 @@ export default {
 			const type = this.tableArr[0].children[0].fieldType;
 			this.tableArr[0].children[0].fieldType = type === "M" ? "D" : "M";
 		},
+		//连线之后回调
 		afterLineAddFun ({ sTableRowIndex,
 			tTableRowIndex,
 			sTable,

@@ -31,6 +31,8 @@ Vue.use(zrDrawHtml)
 </template>
 ```
 
+[参考例子](https://github.com/zjhr/zr-draw-html/blob/master/examples/App.vue)
+
 ## 参数
 
 ```js
