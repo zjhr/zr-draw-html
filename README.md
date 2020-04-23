@@ -81,6 +81,13 @@ Vue.use(zrDrawHtml)
     <td>[]</td>
   </tr>
   <tr>
+    <td>legendColors</td>
+    <td>图例颜色扩张</td>
+    <td>Object</td>
+    <td>{state:Number:"color"}</td>
+    <td>{}</td>
+  </tr>
+  <tr>
     <td>toolbars</td>
     <td>工具栏按钮,当存在radio属性时候，按钮渲染为radio，fun为radio改变时候的回调事件</td>
     <td>Array</td>

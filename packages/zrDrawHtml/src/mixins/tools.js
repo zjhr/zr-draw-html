@@ -7,6 +7,13 @@ export default {
         return [];
       }
     },
+    legendColors: {
+      //图例颜色 {key:color}
+      type: Object,
+      default () {
+        return ({});
+      }
+    },
     toolbars: {
       // 工具按钮 {name:"",icon:"",fun:Function}
       type: Array,
@@ -23,7 +30,8 @@ export default {
         // 图例颜色，关于表头颜色
         blue: "#409EFF",
         green: "#69db7c",
-        yellow: "#ffd43b"
+        yellow: "#ffd43b",
+        ...this.legendColors
       },
       state: "0" // 选择(0)和拖动画布(1)状态
     };
