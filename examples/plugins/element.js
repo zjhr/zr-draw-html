@@ -6,7 +6,8 @@ import {
   Input,
   Tree,
   Popover,
-  Tooltip
+  Tooltip,
+  Main
 } from 'element-ui'
 
 Vue.use(Container)
@@ -16,3 +17,4 @@ Vue.use(Input)
 Vue.use(Tree)
 Vue.use(Header)
 Vue.use(Tooltip)
+Vue.use(Main)

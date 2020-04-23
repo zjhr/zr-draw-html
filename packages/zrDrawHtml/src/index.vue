@@ -127,7 +127,9 @@ export default {
 		},
 		toType: {// 连线类型
 			type: Array,
-			default: ["TToT", "TToR", "RToT", "RToR"]
+			default () {
+				return ["TToT", "TToR", "RToT", "RToR"]
+			}
 		}
 	},
 	data () {
